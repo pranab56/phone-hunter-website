@@ -9,22 +9,29 @@
     
 </head>
 <body class="alert-primary">
-    <h1 class="text-center">PHONE WORLD</h1>
+    <header>
+        <h1 class="text-center">PHONE WORLD</h1>
 
-    <div class="input-group m-5 w-50 mx-auto">
-        <input id="search-field" type="text" class="form-control" placeholder="please search your phone" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button onclick="searchPhone()" class="btn btn-outline-secondary" type="button" id="button-search">search</button>
-      </div>
+        <div class="input-group m-5 w-50 mx-auto">
+            <input id="search-field" type="text" class="form-control" placeholder="please search your phone" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button onclick="searchPhone()" class="btn btn-outline-secondary" type="button" id="button-search">search</button>
+          </div>
+    </header>
+   
 
       
+   <main class="overflow-hidden">
     <div id="phoneDetails" class="row row-cols-1 row-cols-md-3 d-flex justify-content-center ">
         
     </div>
 
 
-      <div id="phoneList" class="row row-cols-1 row-cols-md-3 text-center mt-5 ">
+      <div id="phoneList" class="row row-cols-1 row-cols-md-3 text-center mt-5  ">
         
     </div>
+
+    <h1 style="display: none; text-align: center; color: red;" id="error">No result found</h1>
+   </main>
 
 
 
