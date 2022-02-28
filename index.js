@@ -9,6 +9,7 @@ const searchPhone=()=>{
 }
 const searchValue=(phones)=>{
     const phoneList=document.getElementById('phoneList')
+    phoneList.textContent='';
  for(const phone of phones){
 console.log(phone);
   const div=document.createElement('div')
@@ -19,10 +20,41 @@ console.log(phone);
             >
               <h5 class="card-title mt-2">${phone.phone_name}</h5>
               <h5>${phone.brand}</h5>
-              <button class="border-0 bg-danger rounded text-white p-2">MORE DETAILS</button>
+              <button onclick="phoneDetails('${phone.slug}')" class="border-0 bg-danger rounded text-white p-2">MORE DETAILS</button>
             </div>
          
   `
   phoneList.appendChild(div)
  }
 }
+
+const phoneDetails=phoneId=>{
+  const url=`https://openapi.programming-hero.com/api/phone/${phoneId}`
+  fetch(url)
+  .then(res=>res.json())
+  .then(data=>displayPhoneDetail(data.data))
+}
+const displayPhoneDetail=mobiles=>{
+    console.log(mobiles);
+    const phoneDetails=document.getElementById('phoneDetails')
+    phoneDetails.textContent='';
+    const div=document.createElement('div')
+  div.classList.add('p')
+    div.innerHTML=`
+    
+            <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+            <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+            >
+              <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+              <h5>Release date : ${mobiles.releaseDate}</h5>
+                <p>storage : ${mobiles.mainFeatures.storage}</p>
+                <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
+                <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p>
+              }
+              
+            </div>
+            
+  `
+  phoneDetails.appendChild(div)
+}
+
