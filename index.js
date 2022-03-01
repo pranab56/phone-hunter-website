@@ -50,6 +50,7 @@ const phoneDetails=phoneId=>{
   .then(data=>displayPhoneDetail(data.data))
 }
 const displayPhoneDetail=mobiles=>{
+  // console.log(mobiles);
   if(mobiles.releaseDate != 0){
   
     const phoneDetails=document.getElementById('phone-Details')
@@ -66,6 +67,8 @@ const displayPhoneDetail=mobiles=>{
                     <p>storage : ${mobiles.mainFeatures.storage}</p>
                     <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
                     <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
+                  
+                   
                   }
                 </div>         
       `
@@ -87,12 +90,15 @@ const displayPhoneDetail=mobiles=>{
                     <p>storage : ${mobiles.mainFeatures.storage}</p>
                     <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
                     <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
+                  
                   }
                 </div>         
       `
       phoneDetails.appendChild(div)
+      
   
   }
+
     }
     
   
