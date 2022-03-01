@@ -119,7 +119,7 @@
                   <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
                   >
                   <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
-                  <h5>Release date : Not published </h5>
+                  <h5>Release date : Upcoming </h5>
                   <p style=" text-align: left;"><span style="font-weight:bold">Storage</span> : ${mobiles.mainFeatures.storage}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">Display Size</span> : ${mobiles.mainFeatures.displaySize}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">ChipSet</span> : ${mobiles.mainFeatures.chipSet}</p><hr>
@@ -153,7 +153,7 @@
                      <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
                      >
                      <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
-                    <h5>Release date :Upcoming</h5><hr>
+                    <h5>Release date :Not release</h5><hr>
                     <p style=" text-align: left;"><span style="font-weight:bold">Storage</span> ${mobiles.mainFeatures.storage}</p><hr>
                     <p style=" text-align: left;"><span style="font-weight:bold">Display Size</span> : ${mobiles.mainFeatures.displaySize}</p><hr>
                     <p style=" text-align: left;"><span style="font-weight:bold">ChipSet</span> : ${mobiles.mainFeatures.chipSet}</p><hr> 
