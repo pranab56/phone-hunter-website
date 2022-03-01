@@ -1,43 +1,46 @@
-    const phoneDetail=document.getElementById('phone-Details')
-    // input peramiter
-    const searchPhone=()=>{
-    const searchfield=document.getElementById('search-field')
-    const totalsearch=searchfield.value
-    searchfield.value='';
-    // api data 
-    if(totalsearch==''){
+    // global variable
+      const phoneDetail=document.getElementById('phone-Details')
+      const searchfield=document.getElementById('search-field')
+      const phoneList=document.getElementById('phoneList')
+       // input peramiter
+      const searchPhone=()=>{
+      const searchfield=document.getElementById('search-field')
+      const totalsearch=searchfield.value
+      searchfield.value='';
+      // api data 
+      if(totalsearch==''){
       const error=document.getElementById('error')
-     error.style.display='block'
-     
-     
-    }
-    else{
-    const url=`https://openapi.programming-hero.com/api/phones?search=${totalsearch}`
+      error.style.display='block' 
+      phoneDetail.textContent='';
+      phoneList.textContent='';
+      }
+      else{
+      error.style.display='none'
+      const url=`https://openapi.programming-hero.com/api/phones?search=${totalsearch}`
    
-    fetch(url)
-    .then(res=>res.json())
-    .then(data=>searchValue(data.data))
-    phoneDetail.textContent='';
-    
-   }
-}
-// api total phone 
-    const searchValue=(phones)=>{
-    const phoneList=document.getElementById('phoneList')
-    phoneList.textContent='';
-    phoneDetail.textContent = '';
-    // phones.slice(3.20)
-    
+      fetch(url)
+     .then(res=>res.json())
+     .then(data=>searchValue(data.data))
    
-    if(phones.length==0){
-     const error=document.getElementById('error')
-     error.style.display='block'
-     
-    }
+      phoneList.textContent='';
+      }
+      } 
+      // api total phone 
+      const searchValue=(phones)=>{
+      const phoneList=document.getElementById('phoneList')
+    
+      // phones.slice(3.20)
+    
+      if(phones.length==0){
+      const error=document.getElementById('error')
+      error.style.display='block'
+      phoneList.textContent='';
+      }
    
       else{
-      for(const phone of phones){
+      phones.slice(0, 20).forEach(phone =>{
       // console.log(phone);
+      
       const div=document.createElement('div')
       div.classList.add('col')
       div.innerHTML=`
@@ -49,40 +52,38 @@
                 <button onclick="phoneDetails('${phone.slug}')" class="border-0 bg-danger rounded text-white p-2">MORE DETAILS</button>
                 </div>
                             
-      `
+              `
 
       phoneList.appendChild(div)
-     }
+      }
 
-}
-}
+      )}
+      }
 
 
 
-// api phone details
-   const phoneDetails=phoneId=>{
-   const url=`https://openapi.programming-hero.com/api/phone/${phoneId}`
-  fetch(url)
-  .then(res=>res.json())
-  .then(data=>displayPhoneDetail(data.data))
-}
-       const displayPhoneDetail=mobiles=>{
-      //  console.log(mobiles);
-       if(mobiles.releaseDate != 0 && mobiles.slug !='apple_iphone_13_mini-11104'){
+      // api phone details
+      const phoneDetails=phoneId=>{
+      const url=`https://openapi.programming-hero.com/api/phone/${phoneId}`
+      fetch(url)
+      .then(res=>res.json())
+      .then(data=>displayPhoneDetail(data.data))
+       }
+      const displayPhoneDetail=mobiles=>{
+       //  console.log(mobiles);
+      if(mobiles.releaseDate != 0 && mobiles.slug !='apple_iphone_13_mini-11104'){
   
-        const phoneDetails=document.getElementById('phone-Details')
-        phoneDetails.textContent='';
-    
-         const div=document.createElement('div')
-     
-         div.classList.add('p')
-         div.innerHTML=`
-              <div style="border-radius:15px;" class="card-body alert-warning text-center ">
-              <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
-              >
-                <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+      const phoneDetails=document.getElementById('phone-Details')
+      phoneDetails.textContent='';
+      const div=document.createElement('div')
+      div.classList.add('p')
+      div.innerHTML=`
+                  <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+                  <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+                  >
+                  <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
                   <h5>Release date : ${mobiles.releaseDate}</h5><hr>
-                  <p style=" text-align: left;"><span style="font-weight:bold;">storage</span> : ${mobiles.mainFeatures.storage}</p><hr>
+                  <p style=" text-align: left;"><span style="font-weight:bold;">Storage</span> : ${mobiles.mainFeatures.storage}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">Display Size</span> : ${mobiles.mainFeatures.displaySize}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold; margin:0">ChipSet</span> : ${mobiles.mainFeatures.chipSet}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">Bluetooth</span> :${mobiles.others.Bluetooth}</p><hr>
@@ -98,32 +99,28 @@
                   <p style=" text-align: left;">4. ${mobiles.mainFeatures.sensors[3]}</p>
                   <p style=" text-align: left;">5. ${mobiles.mainFeatures.sensors[4]}</p>
                   <p style=" text-align: left;">6. ${mobiles.mainFeatures.sensors[5]}</p><hr>
-                  
-                 
-                
-              </div>         
-    `
-    phoneDetails.appendChild(div)
-
-}
+                 </div>         
+                  `
+      phoneDetails.appendChild(div)
+      } 
 
       
     
- // console.log(mobiles);
-       else if (mobiles.slug !='apple_iphone_13_mini-11104' && mobiles.others !=0  ){
+      // console.log(mobiles);
+      else if (mobiles.slug !='apple_iphone_13_mini-11104' && mobiles.others !=0  ){
   
-       const phoneDetails=document.getElementById('phone-Details')
-       phoneDetails.textContent='';
+      const phoneDetails=document.getElementById('phone-Details')
+      phoneDetails.textContent='';
   
-       const div=document.createElement('div')
-       div.classList.add('p')
-       div.innerHTML=`
-            <div style="border-radius:15px;" class="card-body alert-warning text-center ">
-            <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
-            >
-              <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
-                <h5>Release date : Not published </h5>
-                <p style=" text-align: left;"><span style="font-weight:bold">storage</span> : ${mobiles.mainFeatures.storage}</p><hr>
+      const div=document.createElement('div')
+      div.classList.add('p')
+      div.innerHTML=`
+                  <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+                  <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+                  >
+                  <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+                  <h5>Release date : Not published </h5>
+                  <p style=" text-align: left;"><span style="font-weight:bold">Storage</span> : ${mobiles.mainFeatures.storage}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">Display Size</span> : ${mobiles.mainFeatures.displaySize}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">ChipSet</span> : ${mobiles.mainFeatures.chipSet}</p><hr>
                   <p style=" text-align: left;"><span style="font-weight:bold">Bluetooth</span> :${mobiles.others.Bluetooth}</p><hr>
@@ -139,30 +136,25 @@
                   <p style=" text-align: left;">4. ${mobiles.mainFeatures.sensors[3]}</p>
                   <p style=" text-align: left;">5. ${mobiles.mainFeatures.sensors[4]}</p>
                   <p style=" text-align: left;">6. ${mobiles.mainFeatures.sensors[5]}</p><hr>
-                  
-                 
-                
-              </div>         
-            `
-           phoneDetails.appendChild(div)
-
-}
+                  </div>         
+                  `
+        phoneDetails.appendChild(div)
+       }
 
     
   
-  else if(mobiles.releaseDate !=0 && mobiles.others != 0){
-    const phoneDetails=document.getElementById('phone-Details')
-    phoneDetails.textContent='';
-    
-      const div=document.createElement('div')
-      div.classList.add('p')
-        div.innerHTML=`
-                  <div style="border-radius:15px;" class="card-body alert-warning text-center ">
-                  <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
-                  >
-                  <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+       else if(mobiles.releaseDate !=0 && mobiles.others != 0){
+       const phoneDetails=document.getElementById('phone-Details')
+       phoneDetails.textContent='';
+       const div=document.createElement('div')
+       div.classList.add('p')
+      div.innerHTML=`
+                     <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+                     <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+                     >
+                     <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
                     <h5>Release date :Upcoming</h5><hr>
-                    <p style=" text-align: left;"><span style="font-weight:bold">storage</span> ${mobiles.mainFeatures.storage}</p><hr>
+                    <p style=" text-align: left;"><span style="font-weight:bold">Storage</span> ${mobiles.mainFeatures.storage}</p><hr>
                     <p style=" text-align: left;"><span style="font-weight:bold">Display Size</span> : ${mobiles.mainFeatures.displaySize}</p><hr>
                     <p style=" text-align: left;"><span style="font-weight:bold">ChipSet</span> : ${mobiles.mainFeatures.chipSet}</p><hr> 
                     <p style=" text-align: left;"><span style="font-weight:bold">Bluetooth</span> : Not Available</p><hr> 
@@ -178,14 +170,10 @@
                     <p style=" text-align: left;">4. ${mobiles.mainFeatures.sensors[3]}</p>
                     <p style=" text-align: left;">5. ${mobiles.mainFeatures.sensors[4]}</p>
                     <p style=" text-align: left;">6. ${mobiles.mainFeatures.sensors[5]}</p><hr>
-
-                  
-                </div>         
-      `
-      phoneDetails.appendChild(div)
-      
-  
-    }
-    }
+                    </div>         
+                    `
+        phoneDetails.appendChild(div)
+        }
+        }
     
     
