@@ -22,8 +22,9 @@ const searchValue=(phones)=>{
     }
 else{
   for(const phone of phones){
-    // console.log(phone);
+    console.log(phone);
       const div=document.createElement('div')
+     
       div.classList.add('col')
       div.innerHTML=`
                 <div style="width:90%; border-radius:15px;" class="card-body shadow-lg alert-danger mx-auto mb-5  ">
@@ -50,32 +51,77 @@ const phoneDetails=phoneId=>{
   .then(data=>displayPhoneDetail(data.data))
 }
 const displayPhoneDetail=mobiles=>{
-  // console.log(mobiles);
-  if(mobiles.releaseDate != 0){
+  console.log(mobiles);
+  if(mobiles.releaseDate != 0 && mobiles.slug !='apple_iphone_13_mini-11104'){
   
     const phoneDetails=document.getElementById('phone-Details')
     phoneDetails.textContent='';
     
       const div=document.createElement('div')
+     
       div.classList.add('p')
-        div.innerHTML=`
-                <div style="border-radius:15px;" class="card-body alert-warning text-center ">
-                <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
-                >
-                  <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
-                    <h5>Release date : ${mobiles.releaseDate}</h5>
-                    <p>storage : ${mobiles.mainFeatures.storage}</p>
-                    <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
-                    <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
-                  
-                   
-                  }
-                </div>         
-      `
-      phoneDetails.appendChild(div)
+      div.innerHTML=`
+              <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+              <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+              >
+                <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+                  <h5>Release date : ${mobiles.releaseDate}</h5>
+                  <p>storage : ${mobiles.mainFeatures.storage}</p>
+                  <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
+                  <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
+                  <p>Bluetooth :${mobiles.others.Bluetooth}</p> 
+                  <p>GPS : ${mobiles.others.GPS}</p> 
+                  <p>NFC : ${mobiles.others.NFC}</p> 
+                  <p>Radio : ${mobiles.others.Radio}</p> 
+                  <p>USB : ${mobiles.others.USB}</p> 
+                  <p>WLAN : ${mobiles.others.WLAN}</p> 
+                
+                 
+                
+              </div>         
+    `
+    phoneDetails.appendChild(div)
 
-  }
-  else{
+}
+
+      
+    
+ // console.log(mobiles);
+ else if (mobiles.slug !='apple_iphone_13_mini-11104' && mobiles.others !=0  ){
+  
+  const phoneDetails=document.getElementById('phone-Details')
+  phoneDetails.textContent='';
+  
+    const div=document.createElement('div')
+   
+    div.classList.add('p')
+    div.innerHTML=`
+            <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+            <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+            >
+              <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+                <h5>Release date : Not published </h5>
+                <p>storage : ${mobiles.mainFeatures.storage}</p>
+                <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
+                <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
+                <p>Bluetooth : ${mobiles.others.Bluetooth}</p> 
+                <p>GPS : ${mobiles.others.GPS}</p> 
+                <p>NFC : ${mobiles.others.NFC}</p> 
+                <p>Radio : ${mobiles.others.Radio}</p> 
+                <p>USB : ${mobiles.others.USB}</p> 
+                <p>WLAN : ${mobiles.others.WLAN}</p> 
+              
+               
+              
+            </div>         
+  `
+  phoneDetails.appendChild(div)
+
+}
+
+    
+  
+  else if(mobiles.releaseDate !=0 && mobiles.others != 0){
     const phoneDetails=document.getElementById('phone-Details')
     phoneDetails.textContent='';
     
@@ -90,8 +136,14 @@ const displayPhoneDetail=mobiles=>{
                     <p>storage : ${mobiles.mainFeatures.storage}</p>
                     <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
                     <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
+                    <p>Bluetooth : Not Available</p> 
+                    <p>GPS : Not Available</p> 
+                    <p>NFC : Not Available</p> 
+                    <p>Radio : Not Available</p> 
+                    <p>USB : Not Available</p> 
+                    <p>WLAN : Not Available</p> 
                   
-                  }
+                  
                 </div>         
       `
       phoneDetails.appendChild(div)
@@ -101,9 +153,4 @@ const displayPhoneDetail=mobiles=>{
 
     }
     
-  
-
-
     
-     
-      
