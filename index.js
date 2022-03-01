@@ -40,6 +40,9 @@ else{
 }
 }
 
+
+
+
 const phoneDetails=phoneId=>{
   const url=`https://openapi.programming-hero.com/api/phone/${phoneId}`
   fetch(url)
@@ -47,9 +50,11 @@ const phoneDetails=phoneId=>{
   .then(data=>displayPhoneDetail(data.data))
 }
 const displayPhoneDetail=mobiles=>{
-    // console.log(mobiles);
+  if(mobiles.releaseDate != 0){
+  
     const phoneDetails=document.getElementById('phone-Details')
     phoneDetails.textContent='';
+    
       const div=document.createElement('div')
       div.classList.add('p')
         div.innerHTML=`
@@ -65,6 +70,34 @@ const displayPhoneDetail=mobiles=>{
                 </div>         
       `
       phoneDetails.appendChild(div)
+
+  }
+  else{
+    const phoneDetails=document.getElementById('phone-Details')
+    phoneDetails.textContent='';
+    
+      const div=document.createElement('div')
+      div.classList.add('p')
+        div.innerHTML=`
+                <div style="border-radius:15px;" class="card-body alert-warning text-center ">
+                <img class='img-fluid' src="${mobiles.image}" class="card-img-top" alt="..."
+                >
+                  <h5 class="card-title mt-2">Device Name : ${mobiles.name}</h5>
+                    <h5>Release date :Upcoming</h5>
+                    <p>storage : ${mobiles.mainFeatures.storage}</p>
+                    <p>Display Size : ${mobiles.mainFeatures.displaySize}</p>
+                    <p>ChipSet : ${mobiles.mainFeatures.chipSet}</p> 
+                  }
+                </div>         
+      `
+      phoneDetails.appendChild(div)
+  
+  }
     }
     
+  
+
+
+    
+     
       
